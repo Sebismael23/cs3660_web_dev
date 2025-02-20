@@ -1,0 +1,334 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top:75px ;
+}
+
+body {
+  width: 100%;
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #acabab !important;
+  color: rgb(255, 255, 255);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+}
+
+.banner, .features, .footer, .abt01{
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+p, a, li, button, ul {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Let the main content grow to fill available space */
+.App {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width:1700px) {
+	main .container {
+		max-width: 100%;
+		padding: 0 150px;
+	}
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(5, 5, 5);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+nav.navbar {
+  padding: 18px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+  transition: 0.32 ease-in-out;
+}
+
+nav.navbar.scrolled {
+  padding: 0px 0;
+  background-color:#121212;
+}
+
+nav.navbar a.navbar-brand {
+  width: 15%;
+
+}
+
+nav.navbar .navbar-nav .nav-link.navbar-link {
+  font-weight: 400;
+  color:#fff;
+  letter-spacing: 0.8px;
+  padding: 0 25px;
+  font-size: 18px;
+  opacity: 0.75;
+}
+
+nav.navbar .navbar-nav .nav-link.navbar-link:hover,
+nav.navbar .navbar-nav .nav-link.navbar-link:active {
+  opacity: 1;
+}
+
+span.navbar-text {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-text button{
+  font-weight: 700;
+  color: #fff; 
+  border: 1px solid #fff;
+  padding: 18px 34px;
+  font-size: 18px;
+  margin-left: 18px;
+  position: relative;
+  background-color: transparent;
+  transition: 0.3s ease-in-out;
+}
+
+.navbar-text button span {
+  z-index: 1;
+}
+
+.navbar-text button::before{
+  content: "";
+  width: 0%;
+  height: 100%;
+  position:absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: 0.3 ease-in-out;
+}
+
+.abt01 {
+  margin-top: 0;
+  padding: 260px 0 100px 0;
+  background-image: url('./img/bg1.jpeg');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.abt01 .tagline {
+  color:#fff;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 8px 10px;
+  background: linear-gradient(90.21deg, rgba(54, 108, 170, 0.8) -5.91%, rgba(74, 47, 189, 0.6) 111.58%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+.abt01 h1 {
+  color: #13dbdb;
+  font-size: 45px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-bottom: 20px;
+  display: block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+.abt01 p {
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  font-size: 25px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  width: 96%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.abt01 button {
+  color: #19b6b6;
+  font-weight: 700;
+  font-size: 25px;
+  margin-top: 60px;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+
+.abt01 button:hover{
+  color: #0ee7e7;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+
+.banner {
+  margin-top: 0;
+  padding: 260px 0 100px 0;
+  background-image: url('./img/banner-bg3.jpeg');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.banner .tagline {
+  color:#fff;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 8px 10px;
+  background: linear-gradient(90.21deg, rgba(54, 108, 170, 0.8) -5.91%, rgba(74, 47, 189, 0.6) 111.58%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+.banner h1 {
+  color: #13dbdb;
+  font-size: 45px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-bottom: 20px;
+  display: block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+.banner p {
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  font-size: 25px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  width: 96%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.banner button {
+  color: #19b6b6;
+  font-weight: 700;
+  font-size: 25px;
+  margin-top: 60px;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+
+.banner button:hover{
+  color: #0ee7e7;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.features {
+  padding: 0 0 50px 0;
+  position: relative;
+  background-image: url('./img/bg1.jpeg');
+}
+.features-bx {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 64px;
+  text-align: center;
+  padding: 60px 50px;
+  margin-top: -60px;
+}
+.features h2 {
+  color: #19b6b6;
+	font-size: 45px;
+	font-weight: 700;
+}
+.features h5 {
+  color: #19b6b6;
+}
+.features p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    margin: 14px 0 75px 0;
+}
+.features-slider {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+.features-slider .item img {
+  width: 90%;
+  margin: 0 auto 15px auto;
+}
