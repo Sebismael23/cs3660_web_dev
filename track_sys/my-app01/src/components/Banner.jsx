@@ -2,7 +2,21 @@
 import {Container, Row, Col} from "react-bootstrap";
 import bannerImg from "../img/banner-img1.png";
 
+
+
+const TrackingButton = () => {
+    const handleClick = (event) => {
+        alert ("Not yet implemented...");
+        console.log(event);
+    }
+    return(
+        <button className="btn btn-primary" onClick={(handleClick)}>Start Tracking</button>
+    )
+
+}
+
 export const Banner = () => {    
+    
     
     return(
         <section className="banner" id="home">
@@ -17,7 +31,13 @@ export const Banner = () => {
                             visibility, security, and control. Reduce losses, optimize operations,
                              and gain peace of mind knowing exactly where your equipment is—anytime,
                               anywhere.</p>
-                        <button onClick={() => console.log('start_tracking')}>Start Tracking Now</button>
+                        {/* One way to add a button */}
+                        {/* <button onClick={() => console.log('start_tracking')}>Start Tracking Now</button> */}
+
+                        {/* second way to add a button  */}
+                        <div className="col">
+                            <TrackingButton />
+                        </div>
                     </Col>
                     <Col xs={12} md={6} xl={5}>
                         <img src={bannerImg} alt="banner Img"/>

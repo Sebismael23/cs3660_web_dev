@@ -6,28 +6,54 @@ import { Banner } from './components/Banner';
 import { Features } from './components/Features';
 import { Footer } from './components/Footer';
 import { About } from './components/About';
+import MainLayout from './layouts/MainLayout';
 
+
+const NotFound = () => <h1>NotFound</h1>;
+
+// Without the main layout
+// function App() {
+//   return (
+//     <div className="App">
+//       <NavBar />
+//       <Routes>
+//         {/* Homepage Route */}
+//         <Route 
+//           path="/" 
+//           element={
+//             <>
+//               <Banner />
+//               <Features />
+//             </>
+//           } 
+//         />
+//         {/* About Route */}
+//         <Route path="/about" element={<About />} />
+//       </Routes>
+//       <Footer />
+//     </div>
+//   );
+// }
+
+
+//When using the main layout
 function App() {
-  return (
-    <div className="App">
-      <NavBar />
+  return(
+    <div className='App'>
       <Routes>
-        {/* Homepage Route */}
-        <Route 
-          path="/" 
-          element={
-            <>
+        <Route path='/' element={
+            <MainLayout title="Home">
               <Banner />
               <Features />
-            </>
-          } 
-        />
-        {/* About Route */}
-        <Route path="/about" element={<About />} />
+            </MainLayout>
+          } />
+        <Route path='/about' element={<About />} />
+
+        
+        <Route NotFound="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </div>
-  );
+  )
 }
 
 export default App;
