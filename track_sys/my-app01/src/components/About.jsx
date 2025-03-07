@@ -38,7 +38,7 @@ export const About = () => {
                          <Col xs={12} md={6} xl = {7}>
                              <h1>{'About US'}</h1>
                              <p>At Tracksure, we are dedicated to helping businesses take control of their most valuable assets. From trucks and vehicles to medical equipment and shipments, we provide advanced tracking solutions that give you real-time visibility, security, and peace of mind. Our mission is to simplify asset management, reduce operational risks, and ensure that your equipment is always where it needs to be.</p>
-                             <button onClick={() => console.log('more_info')}>More Info</button>
+                             <button onClick={() => console.log('more_info')}>Request a Quote</button>
                          </Col>
                          {/* <Col xs={12} md={6} xl={5}>
 //                         <img src={abtus_Img} alt="About us"/>

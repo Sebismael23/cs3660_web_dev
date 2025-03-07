@@ -39,6 +39,8 @@ export const NavBar = () => {
           <Nav className="ms-auto">
             <Nav.Link as ={Link} to ="/" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
             <Nav.Link as ={Link} to ="/about" className={activeLink === 'about' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about')}>About</Nav.Link>
+            <Nav.Link as ={Link} to ="/login" className={activeLink === 'login' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('login')}>Login</Nav.Link>
+            <Nav.Link as ={Link} to ="/admin" className={activeLink === 'admin' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('dashboard')}>Dashboard</Nav.Link>
           </Nav>
           <span className = "navbar-text">
             <button className="vvd" onClick={() => console.log('get_started')}><span>Get Started</span></button>

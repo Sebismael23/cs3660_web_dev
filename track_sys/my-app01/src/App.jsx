@@ -6,6 +6,7 @@ import { Banner } from './components/Banner';
 import { Features } from './components/Features';
 import { Footer } from './components/Footer';
 import { About } from './components/About';
+import { Contact } from './components/Contact';
 import MainLayout from './layouts/MainLayout';
 import AuthRoute from './components/AuthRoute';
 import Login from './components/Login';
@@ -49,6 +50,7 @@ function App() {
           <MainLayout title="Home">
             <Banner />
             <Features />
+            <Contact />
           </MainLayout>
         } />
 

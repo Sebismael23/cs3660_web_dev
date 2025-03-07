@@ -140,6 +140,7 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
   padding: 0 25px;
   font-size: 18px;
   opacity: 0.75;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link:hover,
@@ -180,7 +181,10 @@ span.navbar-text {
   transition: 0.3 ease-in-out;
 }
 
+/* About page */
+
 .abt01 {
+  position: relative;
   margin-top: 0;
   padding: 260px 0 100px 0;
   background-image: url('./img/bg1.jpeg');
@@ -189,17 +193,21 @@ span.navbar-text {
   background-repeat: no-repeat;
 }
 
-.abt01 .tagline {
-  color:#fff;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  padding: 8px 10px;
-  background: linear-gradient(90.21deg, rgba(54, 108, 170, 0.8) -5.91%, rgba(74, 47, 189, 0.6) 111.58%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  font-size: 20px;
-  margin-bottom: 18px;
-  display: inline-block;
+.abt01 * {
+  position: relative;
+  z-index: 2;
 }
+
+.abt01::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(54, 54, 54, 0.1);
+}
+
 .abt01 h1 {
   color: #13dbdb;
   font-size: 45px;
@@ -212,12 +220,12 @@ span.navbar-text {
 }
 .abt01 p {
   color: #ffffff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 5px rgba(24, 24, 24, 0.8);
   font-size: 25px;
   letter-spacing: 0.8px;
   line-height: 1.5em;
   width: 96%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
 }
 .abt01 button {
   color: #19b6b6;
@@ -225,7 +233,6 @@ span.navbar-text {
   font-size: 25px;
   margin-top: 60px;
   letter-spacing: 0.8px;
-  display: flex;
   align-items: center;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -240,6 +247,7 @@ span.navbar-text {
   background: rgba(0, 0, 0, 0.7);
 }
 
+/* banner section  */
 
 .banner {
   margin-top: 0;
@@ -335,4 +343,245 @@ span.navbar-text {
 .features-slider .item img {
   width: 90%;
   margin: 0 auto 15px auto;
+}
+
+
+.contact {
+  background-size:cover;
+  background-repeat: no-repeat; /* Prevents tiling */
+  background-position: center center;
+  margin-top: 0;
+  position: relative;
+  padding: 150px 0 50px 0;
+  background-image: url('./img/abt_us1.jpeg');
+  /* background-position: top center; */
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(1.15px);
+}
+
+.contact * {
+  position: relative;
+  z-index: 2;
+}
+.contact h1 {
+  color: #13dbdb;
+  font-size: 40px;
+  /* font-weight: 500; */
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-bottom: 30px;
+  display: block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+.contact p {
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  font-size: 25px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  width: 96%;
+  text-align: center;
+  /* background-color: rgba(108, 108, 108, 0.5); */
+}
+.contact button {
+  color: #19b6b6;
+  font-weight: 700;
+  font-size: 25px;
+  margin-top: 60px;
+  letter-spacing: 0.8px;
+  /* display: flex; */
+  align-items: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+
+.contact button:hover{
+  color: #0ee7e7;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Login css */
+
+/* Auth Component Styles */
+
+.log{
+  position: relative;
+  margin-top: 0;
+  padding: 100px 0 100px 0;
+  background-image: url('./img/bg1.jpeg');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.auth-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  margin: 6rem auto;       /* Increased top & bottom margin */
+  transform: translateY(50px);  /* Optional: shift the container down by 50px */
+  
+}
+
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  width: 50%;
+  padding: 2rem;
+  
+}
+
+.form-container.sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.form-container.active {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+.form-container.inactive {
+  transform: translateX(0);
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+  
+}
+
+.overlay-container.right-panel-active {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  /* background: #ff416c; */
+  /* background: linear-gradient(to right, #ff4b2b, #ff416c); */
+  /* background-repeat: no-repeat; */
+  background-image: url('./img/banner-bg4.jpeg');
+  background-size: cover;
+  background-position: 0 0;
+  /* color: #fff; */
+  color: #07f9f9;
+  -webkit-text-stroke: 0.3px #000; /* Adds a 1px stroke border to the text */
+  text-shadow: 2px 2px 5px rgb(41, 41, 41);
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  
+}
+
+.overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+
+
+.overlay-container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.overlay-container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.overlay-container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+.ghost {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.auth-button {
+  background: #a341ff;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
