@@ -11,10 +11,55 @@ import MainLayout from './layouts/MainLayout';
 import AuthRoute from './components/AuthRoute';
 import Login from './components/Login';
 import Admin  from './components/admin/Admin';
-
+import Sidebar from './components/Sidebar';
+import Dashboard from './components/Dashboard';
+import Products from './components/products';
+import AdminLayout from './layouts/AdminLayout';
+import Geofencing_alerts from './components/geofencing_alerts';
+import Assets_management from './components/assets_management';
+import Settings from './components/Settings';
 
 
 const NotFound = () => <h1>NotFound</h1>;
+function App() {
+  return(
+    <div className='App'>
+
+      <Routes>
+        <Route path='/' element={
+          <MainLayout title="Home">
+            <Banner />
+            <Features />
+            <Contact />
+          </MainLayout>
+        } />
+
+        <Route path='/about' element={<About />} />
+        <Route path='login' element={<Login />} />
+
+        <Route element = {<AuthRoute />}>
+          <Route element={<AdminLayout />}>
+            {/* <Route path='/admin' element = {<Admin />} /> */}
+            <Route path='/admin/dashboard' element = {<Dashboard /> } />
+            <Route path='/admin/products' element = {<Products /> } />
+            <Route path='/admin/assets_management' element = {<Assets_management /> } />
+            <Route path='/admin/Geofencing_alerts' element = {<Geofencing_alerts /> } />
+            <Route path='/admin/products' element = {<Products /> } />
+            <Route path='/admin/settings' element = {<Settings /> } />
+            {/* <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} /> */}
+          </Route>
+        </Route> 
+        
+
+        <Route NotFound="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  )
+}
+
+export default App;
+
+
 
 // Without the main layout
 // function App() {
@@ -42,30 +87,3 @@ const NotFound = () => <h1>NotFound</h1>;
 
 
 //When using the main layout
-function App() {
-  return(
-    <div className='App'>
-      <Routes>
-        <Route path='/' element={
-          <MainLayout title="Home">
-            <Banner />
-            <Features />
-            <Contact />
-          </MainLayout>
-        } />
-
-        <Route path='/about' element={<About />} />
-
-        <Route path='login' element={<Login />} />
-
-        <Route element = {<AuthRoute />}>
-          <Route path='/admin' element = {<Admin />} />
-        </Route> 
-
-        <Route NotFound="*" element={<NotFound />} />
-      </Routes>
-    </div>
-  )
-}
-
-export default App;

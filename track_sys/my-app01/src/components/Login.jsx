@@ -1,132 +1,3 @@
-// // import {useState} from "react";
-// import { useState, useEffect, useContext } from "react";
-// import {Navigate, useNavigate} from "react-router-dom"
-// import { AuthContext } from "./context/AuthContext";
-// import MainLayout from "../layouts/MainLayout";
-
-
-// function Login()  {
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-//     const [error, setError] = useState("")
-//     const {isLoggedIn, login} = useContext(AuthContext);
-//     const navigate = useNavigate();
-
-
-//     useEffect(() => {
-//         if (isLoggedIn) {
-//             navigate("/admin");
-//         }
-//     }, [isLoggedIn, navigate])
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault()
-//         if (!email || !password)
-//         {
-//             setError("Both fields are required");
-//             return;
-//         }
-
-//         if (login(email, password))
-//             navigate("/admin");
-//         else
-//             setError("Invalid email or password");
-//     };
-
-//     return (
-//         <MainLayout title="Login | MyPage">
-//             <div className="card shadow-lg col-sm-6 col-md-3 p-4">
-//                 <h3 className="text-center mb-4">Login</h3>
-//                 {error && <div className="alert alert-danger">{error}</div>}
-//                 <form onSubmit={handleSubmit}>
-//                     <div className="mb-3">
-//                         <label className="form_label">Email Address</label>
-//                         <input 
-//                             type="email"   
-//                             className="form-control"
-//                             value={email}
-//                             onChange={(e) => setEmail(e.target.value)}
-//                             placeholder="Enter email" 
-//                         />
-//                     </div>
-//                     <div className="mb-3">
-//                         <label className="form-label">Password</label>
-//                         <input 
-//                             type="password"    
-//                             className="form-control"
-//                             value={password}
-//                             onChange={(e) => setPassword(e.target.value)}
-//                             placeholder="Enter password" />
-//                     </div>
-//                     <button type = "submit" className="btn btn-primary w-100">Login</button>
-//                 </form>
-//             </div>
-//         </MainLayout>
-//     )
-// }
-
-// export default Login;
-
-
-// import React, { useState, useEffect, useContext } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "./context/AuthContext";
-// import MainLayout from "../layouts/MainLayout";
-
-// function Login() {
-//   // Toggle state: true for sign in, false for sign up
-//   const [isSignIn, setIsSignIn] = useState(true);
-
-//   // Common fields for both forms (email, password)
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   // Extra field for sign up
-//   const [name, setName] = useState("");
-
-//   const [error, setError] = useState("");
-
-//   // Assuming AuthContext provides both login and register functions
-//   const { isLoggedIn, login, register } = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (isLoggedIn) {
-//       navigate("/admin");
-//     }
-//   }, [isLoggedIn, navigate]);
-
-//   // Handler for sign in
-//   const handleSignIn = (e) => {
-//     e.preventDefault();
-//     if (!email || !password) {
-//       setError("Both email and password are required.");
-//       return;
-//     }
-//     if (login(email, password)) {
-//       navigate("/admin");
-//     } else {
-//       setError("Invalid email or password.");
-//     }
-//   };
-
-//   // Handler for sign up
-//   const handleSignUp = (e) => {
-//     e.preventDefault();
-//     if (!name || !email || !password) {
-//       setError("All fields are required for registration.");
-//       return;
-//     }
-//     if (register(name, email, password)) {
-//       navigate("/admin");
-//     } else {
-//       setError("Registration failed.");
-//     }
-//   };
-
-
-
-
-
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
@@ -144,9 +15,11 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/admin");
+      const redirectPath = location.state?.from || '/admin/dashboard' ;
+      // navigate("/admin");
+      navigate(redirectPath)
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate, location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -159,7 +32,7 @@ function Login() {
         return;
       }
       if (login(email, password)) {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else {
         setError("Invalid email or password");
       }
@@ -174,7 +47,7 @@ function Login() {
         return;
       }
       if (signup(name, email, password)) {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else {
         setError("Registration failed");
       }
