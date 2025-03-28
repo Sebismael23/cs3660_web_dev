@@ -18,6 +18,7 @@ import AdminLayout from './layouts/AdminLayout';
 import Geofencing_alerts from './components/geofencing_alerts';
 import Assets_management from './components/assets_management';
 import Settings from './components/Settings';
+import Reports_Analytics from './components/Reports_Analytics';
 
 
 const NotFound = () => <h1>NotFound</h1>;
@@ -43,7 +44,8 @@ function App() {
             <Route path='/admin/dashboard' element = {<Dashboard /> } />
             <Route path='/admin/products' element = {<Products /> } />
             <Route path='/admin/assets_management' element = {<Assets_management /> } />
-            <Route path='/admin/Geofencing_alerts' element = {<Geofencing_alerts /> } />
+            <Route path='/admin/geofencing_alerts' element = {<Geofencing_alerts /> } />
+            <Route path='/admin/reports_Analytics' element = {<Reports_Analytics /> } />
             <Route path='/admin/products' element = {<Products /> } />
             <Route path='/admin/settings' element = {<Settings /> } />
             {/* <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} /> */}

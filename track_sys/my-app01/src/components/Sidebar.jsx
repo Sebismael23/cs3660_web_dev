@@ -9,7 +9,7 @@ const SIDEBAR_ITEMS =[
     },
     {name: "Assets Management", icon: Radio, color:"#Ffa500", href:"/admin/assets_management"},
     {name: "Geofencing & alerts", icon: LocateFixed, color:"#Ff0000", href:"/admin/geofencing_alerts"},
-    {name: "Reports & Analytics", icon: FileChartLine, color:"#ffb6c1", href:"/admin/Reports_Analytics"},
+    {name: "Reports & Analytics", icon: FileChartLine, color:"#ffb6c1", href:"/admin/reports_Analytics"},
     {name: "Settings", icon: Settings, color:"#10B981", href:"/admin/settings"},
 ]
 
