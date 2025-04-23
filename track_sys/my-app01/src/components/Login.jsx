@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import MainLayout from "../layouts/MainLayout";
 
@@ -10,47 +10,61 @@ function Login() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { isLoggedIn, login, signup } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (isLoggedIn) {
-      const redirectPath = location.state?.from || '/admin/dashboard' ;
-      // navigate("/admin");
-      navigate(redirectPath)
+      const redirectPath = location.state?.from || '/admin/dashboard';
+      navigate(redirectPath);
     }
   }, [isLoggedIn, navigate, location.state]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    if (isSignIn) {
-      // Login
-      if (!email || !password) {
-        setError("Both fields are required");
-        return;
-      }
-      if (login(email, password)) {
-        navigate("/admin/dashboard");
+    try {
+      if (isSignIn) {
+        // Login
+        if (!email || !password) {
+          setError("Both fields are required");
+          setLoading(false);
+          return;
+        }
+        const success = await login(email, password);
+        if (success) {
+          navigate("/admin/dashboard");
+        } else {
+          setError("Invalid email or password");
+        }
       } else {
-        setError("Invalid email or password");
+        // Signup 
+        if (!name || !email || !password || !confirmPassword) {
+          setError("All fields are required");
+          setLoading(false);
+          return;
+        }
+        if (password !== confirmPassword) {
+          setError("Passwords don't match");
+          setLoading(false);
+          return;
+        }
+        const success = await signup(name, email, password);
+        if (success) {
+          navigate("/admin/dashboard");
+        } else {
+          setError("Registration failed");
+        }
       }
-    } else {
-      // Signup 
-      if (!name || !email || !password || !confirmPassword) {
-        setError("All fields are required");
-        return;
-      }
-      if (password !== confirmPassword) {
-        setError("Passwords don't match");
-        return;
-      }
-      if (signup(name, email, password)) {
-        navigate("/admin/dashboard");
-      } else {
-        setError("Registration failed");
-      }
+    } catch (err) {
+      console.error("Authentication error:", err);
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,6 +83,7 @@ function Login() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
               />
               <input
                 type="password"
@@ -76,8 +91,15 @@ function Login() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
               />
-              <button type="submit" className="btn btn-primary w-100">Sign In</button>
+              <button 
+                type="submit" 
+                className="btn btn-primary w-100"
+                disabled={loading}
+              >
+                {loading ? 'Signing In...' : 'Sign In'}
+              </button>
             </form>
           </div>
 
@@ -92,6 +114,7 @@ function Login() {
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                disabled={loading}
               />
               <input
                 type="email"
@@ -99,6 +122,7 @@ function Login() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
               />
               <input
                 type="password"
@@ -106,6 +130,7 @@ function Login() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
               />
               <input
                 type="password"
@@ -113,9 +138,14 @@ function Login() {
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled={loading}
               />
-              <button type="submit" className="btn btn-primary w-100">
-                Sign Up
+              <button 
+                type="submit" 
+                className="btn btn-primary w-100"
+                disabled={loading}
+              >
+                {loading ? 'Creating Account...' : 'Sign Up'}
               </button>
             </form>
           </div>
@@ -126,13 +156,22 @@ function Login() {
               <div className="overlay-panel overlay-left position-absolute d-flex flex-column align-items-center justify-content-center text-center p-4">
                 <h2>Welcome Back!</h2>
                 <p className="my-3">Already have an account? If yes, please login with your personal info</p>
-                <button className="ghost btn btn-outline-light" onClick={() => setIsSignIn(true)}>Sign In
+                <button 
+                  className="ghost btn btn-outline-light" 
+                  onClick={() => setIsSignIn(true)}
+                  disabled={loading}
+                >
+                  Sign In
                 </button>
               </div>
               <div className="overlay-panel overlay-right position-absolute d-flex flex-column align-items-center justify-content-center text-center p-4">
                 <h2>Hello!</h2>
                 <p className="my-3">Enter your personal details and start journey with us</p>
-                <button className="ghost btn btn-outline-light" onClick={() => setIsSignIn(false)}>
+                <button 
+                  className="ghost btn btn-outline-light" 
+                  onClick={() => setIsSignIn(false)}
+                  disabled={loading}
+                >
                   Sign Up
                 </button>
               </div>
@@ -141,7 +180,7 @@ function Login() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }
 
 export default Login;

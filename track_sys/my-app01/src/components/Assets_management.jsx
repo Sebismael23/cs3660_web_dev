@@ -1,32 +1,63 @@
-// Enhanced Assets_management.jsx
-import React, { useState } from 'react'
+// Modified part of your Assets_management.jsx
+import React, { useState, useEffect } from 'react'
 import Header from '../layouts/Header'
 import { motion } from "framer-motion"
 import MapComponent from './MapComponent'
 import { Search, Plus, Filter } from 'lucide-react'
-import AssetCard from './AssetCard' 
-
-// Sample data 
-const mockAssets = [
-  { id: 1, name: "Delivery Van 1", type: "van", status: "active", location: "Warehouse A", lastUpdate: "10 min ago" },
-  { id: 2, name: "Medical Drone", type: "drone", status: "idle", location: "Hospital Route", lastUpdate: "25 min ago" },
-  { id: 3, name: "Company Car", type: "car", status: "offline", location: "Downtown", lastUpdate: "2 hours ago" },
-  { id: 4, name: "Delivery Van 2", type: "van", status: "active", location: "Route 66", lastUpdate: "5 min ago" },
-  { id: 5, name: "Security Drone", type: "drone", status: "active", location: "HQ Perimeter", lastUpdate: "Just now" },
-];
+import AssetCard from './AssetCard'
+import { assetService } from '../services/api'
 
 const Assets_management = () => {
+  const [assets, setAssets] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  // Fetch assets from backend
+  useEffect(() => {
+    const fetchAssets = async () => {
+      setLoading(true);
+      const { success, data, error } = await assetService.getAssets();
+      if (success) {
+        setAssets(data);
+      } else {
+        setError(error || 'Failed to load assets');
+      }
+      setLoading(false);
+    };
+    
+    fetchAssets();
+  }, []);
   
   // Filter assets based on search and filter
-  const filteredAssets = mockAssets.filter(asset => {
+  const filteredAssets = assets.filter(asset => {
     const matchesSearch = asset.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          asset.type.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterStatus === 'all' || asset.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
 
+  // Handle asset creation
+  const handleAddAsset = async () => {
+    // This would typically open a modal with a form
+    // For simplicity, we're using a basic object
+    const newAsset = {
+      name: "New Asset",
+      type: "equipment",
+      status: "active",
+      lat: 40.7128,
+      lng: -74.0060
+    };
+    
+    const { success, data } = await assetService.createAsset(newAsset);
+    if (success) {
+      setAssets([...assets, data.asset]);
+    }
+  };
+
+  // Rest of your component code...
+  
   return (
     <div className='tw-flex-1 tw-overflow-auto tw-relative tw-z-10'>
       <Header title="Assets Management" />
@@ -68,7 +99,10 @@ const Assets_management = () => {
             </div>
 
             {/* Add asset button */}
-            <button className='tw-flex tw-items-center tw-bg-blue-600 tw-text-white tw-rounded-lg tw-px-4 tw-py-2'>
+            <button 
+              className='tw-flex tw-items-center tw-bg-blue-600 tw-text-white tw-rounded-lg tw-px-4 tw-py-2'
+              onClick={handleAddAsset}
+            >
               <Plus size={18} className='tw-mr-2' /> Add Asset
             </button>
           </div>
@@ -83,21 +117,45 @@ const Assets_management = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="tw-lg tw-font-medium tw-mb-4 tw-text-gray-100">Assets ({filteredAssets.length})</h2>
+            <h2 className="tw-lg tw-font-medium tw-mb-4 tw-text-gray-100">
+              Assets ({filteredAssets.length})
+              {loading && <span className="tw-ml-2">(Loading...)</span>}
+            </h2>
+            
+            {error && (
+              <div className="tw-bg-red-500 tw-bg-opacity-20 tw-text-red-300 tw-p-3 tw-rounded-lg tw-mb-4">
+                {error}
+              </div>
+            )}
             
             <div className="tw-space-y-4 tw-max-h-80 tw-overflow-y-auto">
               {filteredAssets.length > 0 ? (
                 filteredAssets.map(asset => (
-                  <AssetCard key={asset.id} asset={asset} />
+                  <AssetCard 
+                    key={asset.id} 
+                    asset={asset} 
+                    onDelete={async (id) => {
+                      await assetService.deleteAsset(id);
+                      setAssets(assets.filter(a => a.id !== id));
+                    }}
+                    onStatusChange={async (id, status) => {
+                      const { success } = await assetService.updateAsset(id, { status });
+                      if (success) {
+                        setAssets(assets.map(a => a.id === id ? {...a, status} : a));
+                      }
+                    }}
+                  />
                 ))
               ) : (
-                <p className="tw-text-gray-300 tw-text-center tw-py-4">No assets match your criteria</p>
+                <p className="tw-text-gray-300 tw-text-center tw-py-4">
+                  {loading ? 'Loading assets...' : 'No assets match your criteria'}
+                </p>
               )}
             </div>
           </motion.div>
 
           {/* Map */}
-          <MapComponent assets={mockAssets} />
+          <MapComponent assets={filteredAssets} />
         </div>
       </main>
     </div>
