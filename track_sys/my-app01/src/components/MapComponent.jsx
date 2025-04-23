@@ -10,8 +10,8 @@ const containerStyle = {
 
 
 const center = {
-  lat: 40.2969, // Default latitude (San Francisco)
-  lng: -111.6946, // Default longitude (San Francisco)
+  lat: 40.2969, // Default latitude (Orem)
+  lng: -111.6946, // Default longitude (Orem)
 };
 
 const mapStyles = [
