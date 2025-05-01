@@ -4,7 +4,7 @@ import { authService } from "../../services/api";
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect(() => {

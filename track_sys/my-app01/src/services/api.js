@@ -3,7 +3,6 @@ const API_URL = 'http://localhost:5000/api';
 
 // Auth API calls
 export const authService = {
-  // Register new user
   register: async (userData) => {
     try {
       const response = await fetch(`${API_URL}/auth/register`, {
@@ -11,16 +10,16 @@ export const authService = {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(userData)
       });
-      return await response.json();
+      
+      const data = await response.json();
+      return { success: response.ok, data };
     } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
+      return { success: false, error: error.message };
     }
   },
 
-  // Login user
   login: async (email, password) => {
     try {
       const response = await fetch(`${API_URL}/auth/login`, {
@@ -28,23 +27,20 @@ export const authService = {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
-      const data = await response.json();
       
+      const data = await response.json();
       if (response.ok) {
-        // Store token in localStorage
         localStorage.setItem('token', data.access_token);
         localStorage.setItem('user', JSON.stringify(data.user));
       }
-      
       return { success: response.ok, data };
     } catch (error) {
-      console.error('Login error:', error);
       return { success: false, error: error.message };
     }
   },
-
+  
   // Get user profile
   getProfile: async () => {
     try {
